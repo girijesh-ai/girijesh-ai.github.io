@@ -1,0 +1,32 @@
+title: Girijesh Prasad's AI Blog
+description: >-
+  Deep dives into AI, Machine Learning, and Agentic Systems.
+  Practical guides for AI Engineers and Data Scientists.
+
+baseurl: ""
+url: "https://girijesh-ai.github.io"
+
+# Author info
+author:
+  name: Girijesh Prasad
+  email: girijeshprasad@example.com
+  
+# Social links
+github_username: girijesh-ai
+linkedin_username: girijeshcse
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Show excerpts on homepage
+show_excerpts: true
+
+# Minima theme settings
+minima:
+  skin: dark
+  social_links:
+    github: girijesh-ai
+    linkedin: girijeshcse
