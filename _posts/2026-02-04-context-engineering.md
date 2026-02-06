@@ -15,17 +15,17 @@ image: assets/images/context-eng/slide_02_stack_1770261010564.png
 
 ---
 
-Picture this: You've built an AI customer support agent. You've fed it your entire documentation—all 5,000 pages of it. Your product catalog, FAQs, troubleshooting guides, everything. The model is top-notch—GPT-4, Claude 3.5, you name it. Yet when a customer asks a straightforward question about your refund policy, the agent fumbles. It gives outdated information. It misses the crucial detail buried on page 2,847.
+Picture this: You've built an AI customer support agent. You've fed it your entire documentation—all 5,000 pages of it. Your product catalog, FAQs, troubleshooting guides, everything. The model is top-notch—GPT-5, latest Claude opus or sonnet, you name it. Yet when a customer asks a straightforward question about your refund policy, the agent fumbles. It gives outdated information. It misses the crucial detail buried on page 2,847.
 
 The problem? It's not the model. It's the **context**.
 
-Welcome to 2024-2025, where we're witnessing a fundamental shift in how we build AI systems. The era of obsessing over the perfect prompt is fading. We're entering the age of **context engineering**—and it's changing everything.
+Welcome to 2025-2026, where we're witnessing a fundamental shift in how we build AI systems. The era of obsessing over the perfect prompt is fading. We're entering the age of **context engineering**—and it's changing everything.
 
 ## The Great Shift: From Prompts to Context
 
 For years, we've been playing the prompt engineering game. Craft the perfect instruction. Add the right examples. Use the magic phrase "Let's think step by step." And honestly, it worked—for simple demos and prototypes.
 
-But something changed in 2024. As AI agents moved from exciting demos to production systems handling millions of real-world interactions, we hit a wall. Not a model capability wall—a *context* wall.
+But something changed in 2025. As AI agents moved from exciting demos to production systems handling millions of real-world interactions, we hit a wall. Not a model capability wall—a *context* wall.
 
 Here's the reality check: **Most AI agent failures today aren't because the model is dumb. They're because the model doesn't have the right information at the right time.**
 
@@ -198,7 +198,7 @@ Even Claude with its 200K token window or GPT-4 with 128K suffers from this. You
 **1. Strategic Reranking**
 Don't just dump documents into context in random order. Use reranking models to place the most critical information at the start or end.
 
-**2. In-Context Retrieval (ICR)**A clever two-step approach:
+**2. In-Context Retrieval (ICR)** A clever two-step approach:
 
 - **Step 1:** Ask the LLM to identify which passage numbers are relevant to the query
 - **Step 2:** Extract just those passages and use them for the final answer
