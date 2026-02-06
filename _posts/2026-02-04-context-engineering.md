@@ -3,7 +3,7 @@ layout: post
 title: "Context Engineering: The New Frontier in Agentic AI"
 date: 2026-02-06 09:00:00 +0530
 categories: [AI, LLM, Agentic AI]
-tags: [Agentic AI,Context Engineering, machine-learning]
+tags: [Agentic AI,Context Engineering, Agentic AI, LLM Memory, Multi-Agent Systems, Prompt Caching, RAG, LangChain, LangGraph, LlamaIndex, AI Cost Optimization]
 author: Girijesh Prasad
 excerpt: "Understanding effective context engineering."
 image: assets/images/context-eng/slide_02_stack_1770261010564.png
@@ -438,7 +438,7 @@ Enough theory. Let's talk frameworks.
 
 ## Best Practices: Do's and Don'ts
 
-### ✅ Do's
+### Do's
 
 **1. Prioritize Relevance Over Quantity**
 More context isn't always better. Aim for "just the right information." Keep context usage at 80-85% of the max limit—leave some headroom.
@@ -469,7 +469,7 @@ Set up dashboards to track token consumption, context bloat, and performance deg
 **5. Test at the Limits**
 Deliberately test with maximum context lengths. Check for "lost in the middle" issues. Validate before going to production.
 
-### ❌ Don'ts
+### Don'ts
 
 **1. Don't Stuff the Context**
 Context rot is real. Overloading leads to degraded performance. Quality beats quantity.
@@ -667,8 +667,3 @@ Now go forth and engineer some brilliant contexts. Your LLM's RAM is waiting. �
 Research conducted: February 2026
 Sources: 16 authoritative references (official documentation, academic papers, technical blogs)
 All insights based on 2024-2025 developments in AI systems
-
-**Keywords:** Context Engineering, Agentic AI, LLM Memory, Multi-Agent Systems, Prompt Caching, RAG, LangChain, LangGraph, LlamaIndex, AI Cost Optimization
-
-**Share this article:**
-#ContextEngineering #AgenticAI #LLM #AIEngineering #LangChain #MultiAgentSystems #MachineLearning #PromptEngineering #RAG #AIOptimization
