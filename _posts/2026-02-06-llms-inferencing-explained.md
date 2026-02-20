@@ -1,3 +1,14 @@
+---
+layout: post
+title: "How LLM Inference Really Works: A Deep Dive into Optimisation Techniques"
+date: 2026-02-06 09:00:00 +0530
+categories: [AI, LLM, Inference]
+tags: [LLM Inference, KV Cache, PagedAttention, FlashAttention, Quantization, Speculative Decoding, vLLM, TensorRT-LLM, GPU Optimization]
+author: Girijesh Prasad
+excerpt: "Making your language models blazing fast without breaking the bank — a deep dive into KV cache, quantization, batching, FlashAttention, and speculative decoding."
+image: assets/images/prefill_decode_phases.png
+---
+
 # How LLM Inference Really Works: A Deep Dive into Optimisation Techniques
 
 *Making your language models blazing fast without breaking the bank*
@@ -44,7 +55,7 @@ Now comes the tricky part—generating the response token by token. This is the 
 
 Here's where the pain starts. If you're generating a 500-token response, you're running this decode step 500 times sequentially. No amount of parallelism helps because token 501 literally cannot be computed until you know token 500.
 
-![Prefill vs Decode Phases Comparison](/Users/girijesh/Documents/langgraph_tutorials/posts/llm-inferencing/carousel_visuals/prefill_decode_phases.png)
+![Prefill vs Decode Phases Comparison](/assets/images/prefill_decode_phases.png)
 
 *Figure 1: Side-by-side comparison of LLM inference phases. Prefill is fast and parallel with high GPU utilization (~85%), while decode is slow and sequential with very low GPU utilization (<10%).*
 
@@ -128,7 +139,7 @@ The GPU spends **90% of its time waiting for memory**, not computing! It's like 
 - You have theoretical 312 TFLOPS capability but achieve maybe 20-30 TFLOPS in practice
 - **GPU utilization during decode: often <10%**
 
-![GPU Memory Bandwidth Bottleneck](/Users/girijesh/Documents/langgraph_tutorials/posts/llm-inferencing/carousel_visuals/memory_bandwidth_bottleneck.png)
+![GPU Memory Bandwidth Bottleneck](/assets/images/memory_bandwidth_bottleneck.png)
 
 *Figure 2: The memory bandwidth bottleneck visualized. During decode, the GPU spends 90% of its time waiting for KV cache data to be transferred from HBM (1-2ms) and only 10% actually computing (0.1-0.2ms). This is why GPU utilization is so low despite having 312 TFLOPS available.*
 
