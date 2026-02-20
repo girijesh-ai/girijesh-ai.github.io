@@ -147,26 +147,23 @@ This memory-bound nature is crucial to understand because many optimisation tech
 
 **Visualizing Autoregressive Generation:**
 
-```mermaid
+<pre class="mermaid">
 graph TD
     A["User Prompt: 'The cat sat on'"] --> B[Prefill Phase]
-    B --> C["Process All Tokens in Parallel<br/>Generate KV cache for prompt"]
+    B --> C["Process All Tokens in Parallel&lt;br/&gt;Generate KV cache for prompt"]
     C --> D{Start Decoding}
-    
-    D --> E["Token 1: 'the'<br/>(attention over all previous)"]
+    D --> E["Token 1: 'the'&lt;br/&gt;(attention over all previous)"]
     E --> F[Append to KV cache]
-    F --> G["Token 2: 'mat'<br/>(attention over all previous)"]
+    F --> G["Token 2: 'mat'&lt;br/&gt;(attention over all previous)"]
     G --> H[Append to KV cache]
-    H --> I["Token 3: '.'<br/>(attention over all previous)"]
+    H --> I["Token 3: '.'&lt;br/&gt;(attention over all previous)"]
     I --> J{EOS token?}
-    
     J -->|No| K[Continue generating...]
     J -->|Yes| L["Complete: 'The cat sat on the mat.'"]
-    
     style B fill:#e1f5e1
     style D fill:#fff4e1
     style L fill:#e1f0ff
-```
+</pre>
 
 *Figure 1: LLM inference has two distinct phases—prefill (parallel processing of the prompt) and decode (sequential token generation). Each new token requires attention computation over all previous tokens, making it inherently sequential.*
 
@@ -380,33 +377,30 @@ vLLM, TensorRT-LLM, and Text Generation Inference all use continuous batching, o
 
 **Visualizing the Difference:**
 
-```mermaid
+<pre class="mermaid">
 gantt
     title Static vs Continuous Batching: GPU Utilization Comparison
     dateFormat X
     axisFormat %L ms
-    
     section Static Batch 1
     Req1 (100ms)    :done, 0, 100
     Req2 (150ms)    :done, 0, 150
     Req3 (200ms)    :done, 0, 200
-    GPU IDLE ❌     :crit, 100, 200
-    
+    GPU IDLE        :crit, 100, 200
     section Static Batch 2
     Wait for batch  :crit, 200, 250
     Req4 (100ms)    :done, 250, 350
     Req5 (150ms)    :done, 250, 400
-    GPU IDLE ❌     :crit, 350, 400
-    
+    GPU IDLE        :crit, 350, 400
     section Continuous Batching
     Req1 (100ms)          :done, c1, 0, 100
     Req2 (150ms)          :done, c2, 0, 150
     Req3 (200ms)          :done, c3, 0, 200
-    Req4 (added @100ms)   :done, c4, 100, 200
-    Req5 (added @150ms)   :done, c5, 150, 250
-    Req6 (added @200ms)   :done, c6, 200, 300
-    NO IDLE TIME! ✅      :active, 0, 300
-```
+    Req4 (added at 100ms) :done, c4, 100, 200
+    Req5 (added at 150ms) :done, c5, 150, 250
+    Req6 (added at 200ms) :done, c6, 200, 300
+    NO IDLE TIME          :active, 0, 300
+</pre>
 
 *Figure 2: Static batching wastes GPU cycles waiting for all sequences to finish (shown in red). Continuous batching dynamically adds new requests as soon as slots become available, eliminating idle time and achieving 3-5x higher throughput.*
 
@@ -502,26 +496,25 @@ Advanced variants like **EAGLE-3** use a lightweight prediction head within the 
 
 **Visualizing Speculative Decoding:**
 
-```mermaid
+<pre class="mermaid">
 graph LR
-    A["Input Context<br/>processed"] --> B["Draft Model<br/>small & fast"]
-    B --> C{"Proposes Tokens:<br/>A, B, C, D, E"}
-    C --> D["Target Model<br/>large & accurate"]
+    A["Input Context&lt;br/&gt;processed"] --> B["Draft Model&lt;br/&gt;small &amp; fast"]
+    B --> C{"Proposes Tokens:&lt;br/&gt;A, B, C, D, E"}
+    C --> D["Target Model&lt;br/&gt;large &amp; accurate"]
     D --> E{"Parallel Verification"}
     E -->|"A: Correct"| F[Accept A]
     E -->|"B: Correct"| G[Accept B]
     E -->|"C: Wrong"| H["Reject C, D, E"]
     F --> I["Output: A, B"]
     G --> I
-    H --> J["Continue from B<br/>draft new candidates"]
+    H --> J["Continue from B&lt;br/&gt;draft new candidates"]
     J -.->|Loop| B
-    
     style B fill:#e1f5e1
     style D fill:#e1f0ff
     style F fill:#d4edda
     style G fill:#d4edda
     style H fill:#f8d7da
-```
+</pre>
 
 *Figure 3: Speculative decoding uses a fast draft model to propose multiple tokens, which the target model verifies in parallel. Accepted tokens are kept; rejected tokens trigger a new draft. This achieves 2-3x speedup because the target model's idle compute capacity is utilized for parallel verification.*
 
